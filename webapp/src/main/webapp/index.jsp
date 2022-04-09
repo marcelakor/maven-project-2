@@ -21,7 +21,7 @@
 <body>
 <div class="header">
   <h1>Sample Java Webapp</h1>
-  <p>God is Wonderful I am grateful to him!</p>
+  <p>God is Wonderful I am so grateful to him!</p>
 </div>
 </body>
 </html>
