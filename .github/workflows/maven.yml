@@ -8,8 +8,22 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+    
 jobs:
+  coala_linter: 
+    runs-on: ubuntu-latest 
+    steps: 
+    - name: Checkout 
+      uses: actions/checkout@v2 
+    - name: Coala Linter 
+      uses: coala/coala-github-action@v1.8.0 
+      with: 
+        linter: coala 
+        files: '**/*.py' 
+        config: |
+          [python] 
+          code_ext: .py
+
   build:
 
     runs-on: ubuntu-latest
