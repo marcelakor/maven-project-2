@@ -13,15 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python 
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
       - name: Install coala
-        run: pip install coala
-      - name: Run coala
+        run: sudo apt-get install -y coala
+      - name: Lint
         run: coala --ci
-      - name: Upload results
-        run: coala-json -o coala-results.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload  with coala
+        run: coala --bears=coala-bears
+    
