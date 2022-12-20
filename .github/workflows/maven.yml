@@ -5,36 +5,23 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-    
+    branches:
+      - main
+
 jobs:
-  coala_linter: 
-    runs-on: ubuntu-latest 
-    steps: 
-    - name: Checkout 
-      uses: actions/checkout@v2 
-    - name: Coala Linter 
-      uses: coala/coala-github-action@v1.8.0 
-      with: 
-        linter: coala 
-        files: '**/*.py' 
-        config: |
-          [python] 
-          code_ext: .py
-
-  build:
-
+  lint:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      - uses: actions/checkout@v2
+      - name: Set up Python 
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - name: Install coala
+        run: pip install coala
+      - name: Run coala
+        run: coala --ci
+      - name: Upload results
+        run: coala-json -o coala-results.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
