@@ -3,20 +3,17 @@
 
 name: Java CI with Maven
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install coala
-        run: sudo apt-get install -y coala
-      - name: Lint
-        run: coala --ci
-      - name: Upload  with coala
-        run: coala --bears=coala-bears
-    
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install coala
+      run: sudo apt-get install -y coala
+
+    - name: Lint with coala
+      run: coala --bears=coala-bears
