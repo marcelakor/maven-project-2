@@ -1,19 +1,26 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: Python, Pip, and Coala Bears Workflow
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Install coala
-      run: sudo apt-get install -y coala
-
-    - name: Lint with coala
-      run: coala --bears=coala-bears
+    - uses: actions/checkout@v2
+    - name: Download and install Python
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install python3
+    - name: Install Pip
+      run: |
+        python3 -m pip install --upgrade pip
+    - name: Install Coala Bears
+      run: |
+        pip install coala-bears
