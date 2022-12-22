@@ -21,6 +21,4 @@ jobs:
     - name: Install Pip
       run: |
         python3 -m pip install --upgrade pip
-    - name: Install Coala Bears
-      run: |
-        pip install coala-bears
+    
