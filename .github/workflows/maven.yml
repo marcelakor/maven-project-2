@@ -21,4 +21,17 @@ jobs:
     - name: Install Pip
       run: |
         python3 -m pip install --upgrade pip
+        
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Checkout
+         uses: actions/checkout@v2
+
+       - name: Install coala
+         run: pip install -y coala
+ 
+       - name: Lint with coala
+         run: coala --bears=coala-bears
+
     
